@@ -4,4 +4,5 @@ public interface HashedValueService {
 
     void addValue(String key);
     String getValue(String key);
+    String getValueFromCache(String key);
 }

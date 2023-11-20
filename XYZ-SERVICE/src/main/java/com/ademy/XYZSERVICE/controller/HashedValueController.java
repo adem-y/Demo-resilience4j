@@ -3,6 +3,7 @@ package com.ademy.XYZSERVICE.controller;
 import com.ademy.XYZSERVICE.model.HashedValue;
 import com.ademy.XYZSERVICE.model.HashedValueRequest;
 import com.ademy.XYZSERVICE.service.HashedValueServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +29,9 @@ public class HashedValueController {
     @PostMapping("/get")
     public String getHashedValue(@RequestBody HashedValueRequest request){
         return service.getValue(request.getKey());
+    }
+    @PostMapping("/getFromCache")
+    public String getHashedValueFromCache(@RequestBody HashedValueRequest request){
+        return service.getValueFromCache(request.getKey());
     }
 }
