@@ -5,6 +5,7 @@ import com.ademy.XYZSERVICE.model.HashedValue;
 import com.ademy.XYZSERVICE.repo.HashedValueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +52,14 @@ public class HashedValueServiceImpl implements HashedValueService {
     }
 
     @Override
-    public String getValue(String key) {
-        return repository.getHashedValueByKey(key);
+    public String getValue(String key) throws InterruptedException {
+        String response = repository.getHashedValueByKey(key);
+        if (StringUtils.isEmpty(response) || StringUtils.isBlank(response)) {
+            throw new RuntimeException("Cannot find hash value for " + key);
+        }
+        else {
+            return response;
+        }
     }
 
     @Override
